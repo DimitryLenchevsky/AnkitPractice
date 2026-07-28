@@ -1,0 +1,34 @@
+<template>
+    <lightning-card title="Team Cases Dashboard">
+        <div class="slds-m-round_medium">
+            <div class="slds-grid">
+                <div class="slds-col slds-p-horizontal_medium">
+                    <lightning-combobox
+                        name="status"
+                        label="Status"
+                        options={statusOptions}
+                        onchange={handleStatusChange} >
+                    </lightning-combobox>
+                </div>
+                <div class="slds-col slds-p-horizontal_medium">
+                    <lightning-combobox
+                        name="owner"
+                        label="Owner"
+                        options={ownerOptions}
+                        onchange={handleOwnerChange} >
+                    </lightning-combobox>
+                </div>
+            </div>
+        </div>
+        <template lwc:if={isCases}>
+            <div class="slds-m-round_medium" style="margin-left: 10px; margin-right: 10px; margin-top: 20px;">
+                <lightning-datatable
+                    key-field="Id"
+                    data={casesToDisplay} 
+                    columns={columns}
+                    hide-checkbox-column>
+                </lightning-datatable>
+            </div>
+        </template>
+    </lightning-card>
+</template>
