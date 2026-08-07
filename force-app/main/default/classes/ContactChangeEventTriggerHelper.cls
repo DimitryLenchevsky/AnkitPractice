@@ -43,7 +43,7 @@ public without sharing class ContactChangeEventTriggerHelper {
             insert tasksToInsert;
         }
     }
-
+    // nice to have a separate method for creating tasks, makes the code cleaner and easier to maintain
     private static Task createTask(ContactChangeEvent contactChangeEvent, String subject, String description) {
         return new Task(
             Subject = subject,
