@@ -54,4 +54,8 @@ public without sharing class ContactChangeEventTriggerHelper {
             Priority = 'Normal'
         );
     }
+
+    private static void logDebug(String message) {
+        System.debug(message);
+    }
 }
