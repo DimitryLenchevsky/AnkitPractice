@@ -1,4 +1,5 @@
 public without sharing class ContactChangeEventTriggerHelper {
+    // This method processes ContactChangeEvent records and creates Task records based on changes to the Email field.
     public static void beforeInsert(List<ContactChangeEvent> contactChangeEventList) {
         List<Task> tasksToInsert = new List<Task>();
         for (ContactChangeEvent contactChangeEvent : contactChangeEventList) {
