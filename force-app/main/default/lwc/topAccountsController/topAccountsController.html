@@ -1,0 +1,27 @@
+<template>
+    <lightning-card title="Top Accounts with Open Opportunities" icon-name="standard:account">
+        <div class="slds-var-p-around_small">
+            <h3 class="slds-text-heading_small">Top Accounts by Annual Revenue:</h3>
+        <template lwc:if={accounts}>
+            <lightning-datatable
+                key-field='id'
+                data={accounts}
+                columns={accColumns}
+                max-row-selection="1"
+                onrowselection={handleRowSelection}>
+            </lightning-datatable>
+        </template>
+        </div></br>
+        <template lwc:if={hasOpportunities}>
+            <div class="slds-var-p-around_small">
+                <h3 class="slds-text-heading_small">Related Opportunities:</h3>
+                <lightning-datatable
+                    key-field='id'
+                    data={opportunities}
+                    columns={oppColumns}
+                    hide-checkbox-column>
+                </lightning-datatable>
+            </div>
+        </template>
+    </lightning-card>
+</template>
