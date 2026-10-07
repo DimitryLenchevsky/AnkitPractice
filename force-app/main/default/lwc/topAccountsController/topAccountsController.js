@@ -22,6 +22,10 @@ export default class TopAccountsController extends LightningElement {
         { label: 'StageName', fieldName: 'stageName', type: 'text' },
     ];
 
+    get hasOpportunities() {
+        return this.opportunities.length > 0;
+    }
+
     @wire(getTopAccountWithOpp)
     wiredAccounts({ data, error }) {
         if (data) {
@@ -58,9 +62,5 @@ export default class TopAccountsController extends LightningElement {
                 amount: currentItem.Amount || '',
             }
         });
-    }
-
-    get hasOpportunities() {
-        return this.opportunities.length > 0;
     }
 }
