@@ -1,0 +1,25 @@
+<template>
+    <lightning-card title="Opportunities by Stage" icon-name="standard:opportunity">
+        <div class="slds-p-horizontal_small">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_2-of-3">
+                    <lightning-combobox name="stageFilter" label="Filter by Stage" placeholder="Select Stage"
+                        value={selectedStage} options={stageOptions} onchange={handleStageChange}>
+                    </lightning-combobox>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning-input type="checkbox" label="Show Close Date" checked={showCloseDate} onchange={handleCloseDateChange}></lightning-input>
+                </div>
+            </div>
+        </div>
+        <div class="slds-var-p-around_small">
+            <template if:true={opportunities.data}>
+                <lightning-datatable key-field="Id" data={opportunities.data} columns={columns}>
+                </lightning-datatable>
+            </template>
+            <template if:true={opportunities.error}>
+                <p><strong>Error fetching Opportunities</strong></p>
+            </template>
+        </div>
+    </lightning-card>
+</template>
