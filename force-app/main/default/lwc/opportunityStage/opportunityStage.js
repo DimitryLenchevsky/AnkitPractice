@@ -4,6 +4,19 @@ import getOpportunities from '@salesforce/apex/OpportunityStageController.getOpp
 import STAGE_NAME from '@salesforce/schema/Opportunity.StageName';
 import OPPORTUNITY_OBJECT from '@salesforce/schema/Opportunity';
 
+const COLUMNS = [
+    { label: 'Name', fieldName: 'Name', type: 'text', sortable: true },
+    { label: 'Amount', fieldName: 'Amount', type: 'currency', sortable: true, sortDirection: 'desc' },
+    { label: 'Stage Name', fieldName: 'StageName', type: 'text', sortable: true },
+    {
+        label: 'Close Date', fieldName: 'CloseDate', type: 'date', sortable: true, typeAttributes: {
+            year: 'numeric',
+            month: 'short',
+            day: '2-digit',
+        }
+    },
+];
+
 export default class OpportunityStage extends LightningElement {
 
     stageOptions = [];
@@ -11,16 +24,8 @@ export default class OpportunityStage extends LightningElement {
     showCloseDate = false;
     sordBy = 'Amount';
     sortDirection = 'DESC';
+    columns = COLUMNS.slice(0, 3);
 
-    columns = [
-        { label: 'Name', fieldName: 'Name', type: 'text' },
-        { label: 'Amount', fieldName: 'Amount', type: 'currency' },
-        { label: 'Stage Name', fieldName: 'StageName', type: 'text' },
-        { label: 'Close Date', fieldName: 'CloseDate', type: 'date', typeAttributes: {
-            year: 'numeric',
-            month: 'short',
-        } },
-    ];
 
 
     @wire(getObjectInfo, {
@@ -39,7 +44,7 @@ export default class OpportunityStage extends LightningElement {
                 label: currentItem.label, value: currentItem.value
             }));
             this.stageOptions = [
-                { label: "All Stages", value: "All" }, 
+                { label: "All Stages", value: "All" },
                 ...stageValues
             ];
 
@@ -56,12 +61,16 @@ export default class OpportunityStage extends LightningElement {
     opportunities;
 
     handleStageChange(event) {
-        console.log(event.detail.value);
         this.selectedStage = event.detail.value;
     }
 
     handleCloseDateChange(event) {
-        console.log(event.detail.checked);
         this.showCloseDate = event.detail.checked;
+        this.showCloseDate ? this.columns = COLUMNS : this.columns = COLUMNS.slice(0, 3);
+    }
+
+    handleSort(event) {
+        this.sortBy = event.detail.fieldName;
+        this.sortDirection = event.detail.sortDirection;
     }
 }
