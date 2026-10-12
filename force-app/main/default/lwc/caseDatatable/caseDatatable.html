@@ -1,0 +1,35 @@
+<template>
+    <lightning-card title="Case datatable" icon-name="standard:case">
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col slds-size_2-of-3">
+                <lightning-combobox
+                name="CaseStatus"
+                label="Case Status"
+                value={selectedCaseStatus}
+                placeholder="Select Case Status"
+                options={caseStatusValues}
+                onchange={handleCaseStatusChange} ></lightning-combobox>
+            </div>
+            <div class="slds-col slds-size_1-of-3">
+                <div class="slds-p-around_medium lgc-bg">
+                    <lightning-input type="checkbox" label="Show Priority field" checked={showPriorityField} onchange={handlePriorityFieldChange}></lightning-input>
+                </div>
+            </div>
+        </div>
+        <div class="slds-var-p-around_small">
+            <template if:true={cases.data}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={cases.data}
+                    columns={columns}
+                    sorted-by={sortBy}
+                    sorted-direction={sortDirection} 
+                    onsort={handleSort}>
+                </lightning-datatable>
+            </template>
+            <template if:true={cases.error}>
+                <p><strong>Error fetching Cases</strong></p>
+            </template>
+        </div>
+    </lightning-card>
+</template>
