@@ -45,10 +45,8 @@ export default class CaseManagement extends LightningElement {
     @wire(getOpenCases, { accountId: "$selectedAccountId" })
     getWiredCases(result) {
         this.wiredCasesResult = result;
-        console.log('RESULT: ', result);
         if (result.data) {
             this.cases = this.processCaseResult(result.data);
-            console.log('CASES: ', this.cases);
             this.error = null;
         } else if (result.error) {
             this.error = result.error;
@@ -77,10 +75,8 @@ export default class CaseManagement extends LightningElement {
     }
 
     async handleSelectedCases() {
-        console.log('clicked');
         try {
             const caseIds = this.selectedRows.map(currentRow => currentRow.Id);
-            console.log(caseIds);
             await closeSelectedCases({ caseIds: caseIds })
             this.selectedRows = [];
             this.showNotification();

@@ -19,7 +19,7 @@ public without sharing class CaseManagementController {
     @AuraEnabled
     public static void closeSelectedCases(List<Id> caseIds) {
         try {
-            List<Case> caseList = [SELECT Id, IsClosed, Status FROM Case WHERE Id IN : caseIds];
+            List<Case> caseList = [SELECT Id, Status FROM Case WHERE Id IN : caseIds];
 
             for (Case caseRec : caseList) {
                 caseRec.Status = 'Closed';
