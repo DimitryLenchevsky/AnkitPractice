@@ -1,0 +1,40 @@
+<template>
+    <lightning-card title="Case Management" icon-name="standard:case">
+        <div class="slds-var-p-around_small">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_2-of-3">
+                    <lightning-record-picker label="Filter by Accounts" placeholder="Search Accounts..."
+                        object-api-name="Account" onchange={handleSearchAccount}>
+                    </lightning-record-picker>
+                </div>
+                <div class="slds-col slds-size_1-of-3 slds-text-align_right">
+                    <lightning-button variant="brand" label="Close selected Cases" onclick={handleSelectedCases}
+                        disabled={disabledButton} class="slds-m-left_x-small"></lightning-button>
+                </div>
+            </div>
+        </div>
+        <div class="slds-var-p-around_small">
+            <div class="slds-grid">
+                <div class="slds-col slds-p-horizontal_medium">
+                    <div class="slds-text-align_left">Total open Cases: <strong>{totalCasesCount}</strong></div>
+                </div>
+                <div class="slds-col slds-p-horizontal_medium">
+                    <div class="slds-text-align_right">Total selected Cases: <strong>{totalCasesSelected}</strong></div>
+                </div>
+            </div>
+        </div>
+        <div class="slds-var-p-around_small">
+            <template lwc:if={isDataAvailable}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={cases}
+                    columns={columns}
+                    onrowselection={handleRowSelection}>
+                </lightning-datatable>
+            </template>
+            <template lwc:if={error}>
+                <p>Error fetching cases: {error}</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>
