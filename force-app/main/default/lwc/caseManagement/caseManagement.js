@@ -5,7 +5,13 @@ import getOpenCases from '@salesforce/apex/CaseManagementController.getOpenCases
 import closeSelectedCases from '@salesforce/apex/CaseManagementController.closeSelectedCases'
 
 const COLUMNS = [
-    { label: 'CaseNumber', fieldName: 'CaseNumber', type: 'text' },
+    { label: 'CaseNumber',
+       fieldName: 'CaseUrl',
+       type: 'url',
+       typeAttributes: {
+         label: { fieldName: 'CaseNumber' },
+         target: '_self' }
+    },
     { label: 'Subject', fieldName: 'Subject', type: 'text' },
     { label: 'AccountName', fieldName: 'AccountName', type: 'text' },
     { label: 'ContactName', fieldName: 'ContactName', type: 'text' },
@@ -58,6 +64,7 @@ export default class CaseManagement extends LightningElement {
     processCaseResult(caseData) {
         const processedResponse = caseData.map(caseRecord => ({
             ...caseRecord,
+            CaseUrl: `/${caseRecord.Id}`,
             AccountName: caseRecord.Account?.Name || 'N/A',
             ContactName: caseRecord.Contact?.Name || 'N/A',
         }));
@@ -88,9 +95,9 @@ export default class CaseManagement extends LightningElement {
 
     showNotification() {
         const evt = new ShowToastEvent({
-        title: this.titleText,
-        message: this.messageText,
-        variant: this.variant,
+            title: this.titleText,
+            message: this.messageText,
+            variant: this.variant,
         });
         this.dispatchEvent(evt);
     }
