@@ -1,0 +1,18 @@
+<template>
+    <lightning-card title="Reactive Case list" icon-name="standard:opportunity">
+        <div class="slds-m-around_medium">
+            <template lwc:if={cases}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={cases}
+                    columns={columns}
+                    hide-checkbox-column="true"
+                    show-row-number-column="true">
+                </lightning-datatable>
+            </template>
+            <template lwc:elseif={error}>
+                <p>Error fetching cases: {error.message}</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>
