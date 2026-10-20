@@ -13,6 +13,10 @@ trigger OpportunityTrigger on Opportunity (after insert, after update, after del
         if (Trigger.isUpdate) {
             OpportunityTriggerHelper.afterUpdate(Trigger.new, Trigger.oldMap);
         }
+    } else if (Trigger.isAfter) {
+        if (Trigger.isInsert) {
+            OpportunityTriggerHelper.beforeInsert(Trigger.new);
+        }
     }
 
 }
