@@ -1,0 +1,13 @@
+<template>
+    <template lwc:if={getAccountsResult.data}>
+        <lightning-datatable
+                key-field="accountId"
+                data={getAccountsResult.data}
+                columns={accountColumns}
+                onrowselection={handleRowSelection}>
+        </lightning-datatable>
+    </template>
+    <template lwc:if={getAccountsResult.error}>
+        <h1>Error while fetching the accounts</h1>
+    </template>
+</template>
