@@ -21,7 +21,7 @@ public with sharing class AccountWithCasesAndOppsController {
         List<RelatedWrapper> accountWraperList = new List<RelatedWrapper>();
         for (Account acc : [SELECT Id, 
                 (SELECT Id, CaseNumber, Priority, Account.Name FROM Cases),
-                (SELECT Id, Name, StageName FROM Opportunities) 
+                (SELECT Id, Name, StageName, Account.Name FROM Opportunities) 
                 FROM Account WHERE Id IN :accountIds]) {
 
             RelatedWrapper relatedWrap = new RelatedWrapper();
