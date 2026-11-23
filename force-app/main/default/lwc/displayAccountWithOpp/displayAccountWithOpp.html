@@ -1,0 +1,15 @@
+<template>
+    <template lwc:if={accounts.data}>
+        <lightning-datatable
+                key-field="accountId"
+                data={accounts.data}
+                columns={columns}
+                max-row-selection="1"
+                onrowselection={handleRowSelection}>
+        </lightning-datatable>
+    </template>
+    <template lwc:if={accounts.error}>
+        <h3>Error occured while fetching the data</h3>
+        <p>{accounts.error}</p>
+    </template>
+</template>

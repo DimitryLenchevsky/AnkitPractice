@@ -1,0 +1,12 @@
+<template>
+    <template lwc:if={recordId}>
+        <lightning-card title="Account details">
+            <lightning-record-form
+                object-api-name='Account'
+                record-id={recordId}
+                fields={fields}
+            >
+            </lightning-record-form>
+        </lightning-card>
+    </template>
+</template>

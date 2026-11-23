@@ -5,10 +5,10 @@ public without sharing class AccountDetailsController {
         List<AccountWrapper> accWrapper = new List<AccountWrapper>();
         for (Account acc : [SELECT Id, Name, Type, BillingCountry, (SELECT Id FROM Opportunities) FROM Account]) {
             AccountWrapper accWrp = new AccountWrapper();
-            accWrp.nameUrl = acc.Name;
-            accWrp.accountName = acc.Name;
-            accWrp.accountId = acc.Id;
-            accWrp.accountType = acc.Type;
+            accWrp.nameUrl               = '/'+acc.Id;
+            accWrp.accountName           = acc.Name;
+            accWrp.accountId             = acc.Id;
+            accWrp.accountType           = acc.Type;
             accWrp.accountBillingCountry = acc.BillingCountry;
             accWrp.numberOfOpportunities = acc.Opportunities.size();
             accWrapper.add(accWrp);
