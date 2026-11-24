@@ -4,14 +4,15 @@ import { publish, MessageContext } from "lightning/messageService";
 import accountDetails from "@salesforce/messageChannel/accountDetails__c";
 
 const COLUMNS = [
-    { label: 'Account Name', fieldName: 'nameUrl', type: 'url', typeAttributes: {
-        label: { fieldName: 'accountName' },
-        target: '_blank',
-        } 
+    {
+        label: 'Account Name', fieldName: 'nameUrl', type: 'url', typeAttributes: {
+            label: { fieldName: 'accountName' },
+            target: '_blank',
+        }
     },
     { label: 'Type', fieldName: 'accountType', type: 'text' },
     { label: 'Country', fieldName: 'accountBillingCountry', type: 'text' },
-    { label: 'Total Opportunities', fieldName: 'numberOfOpportunities', type: 'number', sortable:true },
+    { label: 'Total Opportunities', fieldName: 'numberOfOpportunities', type: 'number', sortable: true },
 ];
 
 export default class DisplayAccountWithOpp extends LightningElement {

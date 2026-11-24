@@ -11,29 +11,29 @@ import {
 import accountDetails from "@salesforce/messageChannel/accountDetails__c";
 
 export default class SubscribeAccountDetails extends LightningElement {
-    subscription = null;
-    recordId = '';
-    fields = [ACCOUNT_NAME, ACCOUNT_TYPE, ACCOUNT_BILLING_ADDRESS];
+  subscription = null;
+  recordId = '';
+  fields = [ACCOUNT_NAME, ACCOUNT_TYPE, ACCOUNT_BILLING_ADDRESS];
 
-    @wire(MessageContext)
-    messageContext;
+  @wire(MessageContext)
+  messageContext;
 
-    connectedCallback() {
-        this.subscribeToMessageChannel();
+  connectedCallback() {
+    this.subscribeToMessageChannel();
+  }
+
+  subscribeToMessageChannel() {
+    if (!this.subscription) {
+      this.subscription = subscribe(
+        this.messageContext,
+        accountDetails,
+        (message) => this.handleMessage(message),
+        { scope: APPLICATION_SCOPE },
+      );
     }
+  }
 
-    subscribeToMessageChannel() {
-        if (!this.subscription) {
-            this.subscription = subscribe(
-                this.messageContext,
-                accountDetails,
-                (message) => this.handleMessage(message),
-                { scope: APPLICATION_SCOPE },
-            );
-        }
-    }
-
-    handleMessage(message) {
+  handleMessage(message) {
     this.recordId = message.recordId;
   }
 
