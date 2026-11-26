@@ -17,7 +17,7 @@ export default class CaseDatatable extends LightningElement {
     sortBy = 'Status';
     sortDirection = 'desc';
     showPriorityField = false;
-    columns = COLUMNS.slice(0,3);
+    columns = COLUMNS.slice(0, 3);
 
     @wire(getObjectInfo, { objectApiName: CASE_OBJECT })
     caseObjectinfo;
@@ -50,7 +50,7 @@ export default class CaseDatatable extends LightningElement {
 
     handlePriorityFieldChange(event) {
         this.showPriorityField = event.detail.checked;
-        this.showPriorityField ? this.columns = COLUMNS : this.columns = COLUMNS.slice(0,3);
+        this.showPriorityField ? this.columns = COLUMNS : this.columns = COLUMNS.slice(0, 3);
     }
 
     handleSort(event) {
